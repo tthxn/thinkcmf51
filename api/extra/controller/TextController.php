@@ -5,6 +5,7 @@ namespace api\extra\controller;
 
 use baidu\Text2audio;
 use baidu\Translate;
+use baiduSpeech\ImgToText;
 
 class TextController
 {
@@ -98,5 +99,64 @@ class TextController
         $filePutResult = file_put_contents($filePath . $fileName, $res['data']);//注意：file_put_contents方法不可以存储数组
 
         echo $filePutResult;//返回的是文件大小
+    }
+
+
+    /**
+     * 图片文字识别-百度文字识别
+     *  10分钟快速掌握百度文字识别教程 http://ai.baidu.com/forum/topic/show/867951
+     */
+    public function imgToText(){
+        //从数据库配置信息中读取
+        /*
+         * //获取百度apikey配置信息
+        $app_config = cmf_get_option('app_config');
+        if (empty($app_config['baidu_app_id']) || empty($app_config['baidu_api_key']) || empty($app_config['baidu_sec_key'])){
+            exit("暂未完成翻译配置");
+            //$this->error(lang("暂未完成配置"));
+        }
+
+        //进行操作
+        $baiduAi = new ImgToText($app_config['baidu_app_id'],$app_config['baidu_api_key'],$app_config['baidu_sec_key']);
+        $text = $baiduAi->index();
+        */
+
+
+        $imgPath = cmf_get_image_url('/upload/img/6.png');//拼接图片完整路径
+        $image = file_get_contents($imgPath);
+
+
+        $text = (new ImgToText('123','dfasdf','sdfasdfasdfasdfasdf'))->index($image);
+        echo json_encode($text);die();
+    }
+
+
+    /**
+     * 身份证图片文字识别-百度文字识别
+     * @url1 10分钟快速掌握百度文字识别教程 http://ai.baidu.com/forum/topic/show/867951
+     * @url2 当前访问路由：http://{host}/api/extra/text/imgToText2
+     */
+    public function imgToText2(){
+        //从数据库配置信息中读取
+        /*
+         * //获取百度apikey配置信息
+        $app_config = cmf_get_option('app_config');
+        if (empty($app_config['baidu_app_id']) || empty($app_config['baidu_api_key']) || empty($app_config['baidu_sec_key'])){
+            exit("暂未完成翻译配置");
+            //$this->error(lang("暂未完成配置"));
+        }
+
+        //进行操作
+        $baiduAi = new ImgToText($app_config['baidu_app_id'],$app_config['baidu_api_key'],$app_config['baidu_sec_key']);
+        $text = $baiduAi->index();
+        */
+
+        $imgPath = cmf_get_image_url('/upload/img/timg.jpg');//拼接图片完整路径
+        $image = file_get_contents($imgPath);
+        $idCardSide = "front";//front正面，back反面
+
+        $imgToText = new ImgToText('121212','fsdfsdfsdf0','rGgdfgsfgsertegsgwrsQ');
+        $text = $imgToText->IdCard($image,$idCardSide);
+        echo json_encode($text);die();
     }
 }

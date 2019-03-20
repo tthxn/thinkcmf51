@@ -1,9 +1,11 @@
-###api/extra/controller/textController
+### api/extra/controller/textController
 > 对应扩展放在了extend/baidu/文件夹下面
 
-* 集合百度进行语言翻译http://{$host}/api/extra/text/textToTranslate
-* 集合百度进行语音文件合成 http://{$host}/api/extra/text/textToAudio
+* 集合百度进行语言翻译  http://{$host}/api/extra/text/textToTranslate
+* 集合百度进行语音文件合成  http://{$host}/api/extra/text/textToAudio
 
+### 20190320 新增图片文字识别、身份证识别
+* 集成百度文字识别 http://{host}/api/extra/text/imgToText
 
 
 
